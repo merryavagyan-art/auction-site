@@ -1,0 +1,7 @@
+/* Prototype controls (only on pages that have switchable states) */
+.dc-controls{position:fixed;left:16px;bottom:16px;z-index:50;background:#16140F;color:#EDE8DE;font:13px/1.4 'Noto Sans','Noto Sans Armenian',system-ui,sans-serif;padding:10px 14px;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:280px}
+.dc-controls summary{cursor:pointer;font-weight:600;min-height:28px;display:flex;align-items:center}
+.dc-controls label{display:flex;flex-direction:column;gap:4px;margin-top:10px;color:#CFC8BA}
+.dc-controls select{font:inherit;padding:6px;border-radius:2px;border:1px solid #6B665C;background:#24211B;color:#EDE8DE}
+.dc-controls input[type=checkbox]{width:18px;height:18px;accent-color:#E0A23A}
+.dc-controls button{margin-top:12px;font:inherit;padding:6px 10px;border:1px solid #6B665C;background:transparent;color:#EDE8DE;border-radius:2px;cursor:pointer}
