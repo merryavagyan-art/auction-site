@@ -116,14 +116,19 @@
     return el.nodeType === 1 && el.localName === v.tag;
   }
   function update(el, v) {
+    // Like React: only touch what changed in the template since the last render,
+    // so styles and attributes set by page scripts (animations) are left alone.
     var old = el.__attrs || {};
     for (var a in old) if (!(a in v.attrs)) el.removeAttribute(a);
-    for (var b in v.attrs) if (old[b] !== v.attrs[b] || el.getAttribute(b) !== v.attrs[b]) el.setAttribute(b, v.attrs[b]);
+    for (var b in v.attrs) if (old[b] !== v.attrs[b]) el.setAttribute(b, v.attrs[b]);
     el.__attrs = v.attrs;
+    var oldP = el.__props || {};
     for (var p in v.props) {
+      if (oldP[p] === v.props[p]) continue;
       if (p === 'value') { if (el.value !== v.props.value && document.activeElement !== el) el.value = v.props.value; }
-      else if (el[p] !== v.props[p]) el[p] = v.props[p];
+      else el[p] = v.props[p];
     }
+    el.__props = v.props;
     var h = el.__h || (el.__h = {});
     for (var e in h) if (!v.events[e]) { el.removeEventListener(e, h[e].l); delete h[e]; }
     for (var f in v.events) {
@@ -196,9 +201,8 @@
     };
     comp.__render = render;
     render();
-    controls(comp, spec, render);
-    if (comp.componentDidMount) comp.componentDidMount();
-    if (location.hash) {
+    if (window.DC_CONTROLS) controls(comp, spec, render);
+    if (comp.componentDidMount) comp.componentDidMount();    if (location.hash) {
       var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
       if (t) t.scrollIntoView();
     }
