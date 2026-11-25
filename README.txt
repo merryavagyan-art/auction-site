@@ -1,4 +1,4 @@
-Աճուրդ — Final Design (offline)
+Art.gallery — Final Design (offline)
 
 Open index.html (double-click). No server or internet needed.
 
